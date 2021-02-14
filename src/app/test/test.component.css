@@ -1,0 +1,14 @@
+.video-container {
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    height: 70vh;
+    overflow: hidden;
+}
+
+video {
+    height: 100%;
+}

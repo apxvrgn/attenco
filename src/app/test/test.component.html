@@ -1,0 +1,10 @@
+<button (click)="rtc.CreateRoom()">Create Room</button>
+<input #input_id>
+<button (click)="rtc.JoinRoom(input_id.value)">Join Room</button>
+<div style="display: flex; flex-direction: row; justify-content: space-evenly; width: 100%;">
+    <div class="video-container">
+        <video playsinline autoplay muted #local_video></video>
+    </div>
+    <!--<video playsinline autoplay muted *ngFor="let i of rtc.GetConnectionCount()"></video>-->
+    <app-chat></app-chat>
+</div>
