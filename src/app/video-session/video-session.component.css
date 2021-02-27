@@ -1,0 +1,70 @@
+.vid-chat-container {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-evenly; 
+    width: 100%; 
+    height: calc(100% - 120px); 
+    align-items: center;
+}
+
+.video-container {
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 73vw;
+    height: 80vh;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.z-wrapper {
+    display:block;
+    position: relative;
+    width: 73vw;
+    height: 80vh;
+    z-index: 1;
+}
+
+.z-wrapper:hover #hud {
+    opacity: 1.0;
+}
+
+video {
+    transition: all 0.3s;
+}
+
+.video-container.single * {
+    height: 100%;
+}
+
+.video-container.multiple {
+    flex-wrap: wrap;
+    justify-content: top;
+}
+
+.video-container.multiple * {
+    max-width: 25%;
+}
+
+#hud {
+    position: absolute;
+    opacity: 0.0;
+    display: flex;
+    flex-direction: row;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 17px 16px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    z-index: 2;
+    transition: all 0.3s;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+#hud * {
+    margin: 0 16px;
+}

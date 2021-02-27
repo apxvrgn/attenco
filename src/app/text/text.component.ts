@@ -17,7 +17,6 @@ export class TextComponent implements OnInit {
   }
 
   GetSelf(): string{
-    console.log(this.self);
     if (this.self) {
       return 'self';
     }

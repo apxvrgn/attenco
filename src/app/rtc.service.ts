@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { config, Observable } from 'rxjs';
+import { config, Observable, Subject } from 'rxjs';
 import { Globals } from './Globals';
 
 const configuration = {
@@ -46,6 +46,8 @@ export class RtcService {
   local_user_data!: Observable<User>;
 
   connections: Map<string, RTCPeerConnection>;
+  //connections_subject: Subject<RTCPeerConnection> = new Subject<RTCPeerConnection>();
+  streams: MediaStream[] = [];
 
   constructor(private firestore: AngularFirestore) {
     this.connections = new Map<string, RTCPeerConnection>();
@@ -65,10 +67,21 @@ export class RtcService {
     connection.onconnectionstatechange = (ev) => {
       console.log(connection.connectionState);
     }
+
+    let stream: MediaStream = new MediaStream();
+
+    connection.ontrack = (ev) => {
+      stream.addTrack(ev.track);
+    }
+
+    this.streams.push(stream);
     
-    this.local_stream.getTracks().forEach(track => {
-      connection.addTrack(track, this.local_stream);
-    });
+    if (this.local_stream) {
+      this.local_stream.getTracks().forEach(track => {
+        connection.addTrack(track, this.local_stream);
+      });
+    }
+
     return connection;
   }
 
@@ -92,6 +105,7 @@ export class RtcService {
             if (!this.connections.has(id)) {
               let connection = this.CreateConnection(id);
               this.connections.set(id, connection);
+              //this.connections_subject.next(connection);
             }
             let connection = this.connections.get(id);
             if (connection) {
@@ -114,6 +128,7 @@ export class RtcService {
             if (!this.connections.has(id)) {
               let connection = this.CreateConnection(id);
               this.connections.set(id, connection);
+              //this.connections_subject.next(connection);
             }
             let connection = this.connections.get(id);
             if (connection) {
@@ -130,15 +145,12 @@ export class RtcService {
 
   async GetRoomRef(room_id: string) {
     this.room_ref = await this.firestore.doc<Room>('rooms/'+room_id);
-    Globals.room_id = room_id;
   }
 
   public async CreateRoom() {
     let room_id = await (await this.firestore.collection('rooms').add({ user_count: 0 } as Room)).id;
-    console.log(room_id);
-    await this.GetRoomRef(room_id);
-    await this.CreateSelf();
-
+    Globals.room_id = room_id;
+    return room_id;
   }
 
   public async JoinRoom(room_id: string) {
@@ -150,6 +162,9 @@ export class RtcService {
       await connection.setLocalDescription(offer);
       this.room_ref.collection('users').doc(i.toString()).collection('sdps').doc(this.id.toString()).set({ sdp: offer.sdp, type: offer.type });
       this.connections.set(i.toString(), connection);
+      //this.connections_subject.next(connection);
     }
+    Globals.room_id = room_id;
+    return room_id;
   }
 }

@@ -8,11 +8,9 @@
         </div>
     </mat-card-content>
     <mat-card-actions>
-        <form>
-            <mat-form-field>
-                <mat-label>Message</mat-label>
-                <textarea matInput placeholder="text"></textarea>
-            </mat-form-field>
+        <form [formGroup]="chatForm" (keydown.enter)="SendMessage()">
+            <input type="text" formControlName="msg">
         </form>
+        
     </mat-card-actions>
 </mat-card>

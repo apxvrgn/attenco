@@ -1,0 +1,22 @@
+<div class="vid-chat-container">
+    <!--<div class="z-wrapper">
+        <div class="video-container single" #video_container>
+            <video playsinline autoplay muted #local_video></video>
+            <video playsinline autoplay muted *ngFor="let stream of rtc.streams" src="URL.createObjectURL({{stream}});" #peer_video></video>
+        </div>
+        <div id="hud">
+            <button mat-fab color="" aria-label="Example icon button with a delete icon" style="width: 54px; height: 54px">
+                <mat-icon>mic_off</mat-icon>
+            </button>
+            <button mat-fab color="warn" aria-label="Example icon button with a delete icon" style="width: 64px; height: 64px;">
+                <mat-icon>call_end</mat-icon>
+            </button>
+            <button mat-fab color="" aria-label="Example icon button with a delete icon" style="width: 54px; height: 54px">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>-->
+
+    <app-whiteboard *ngIf="rtc.room_ref"></app-whiteboard>
+    <!--<app-chat *ngIf="rtc.room_ref"></app-chat>-->
+</div>

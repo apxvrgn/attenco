@@ -1,10 +1,64 @@
-<button (click)="rtc.CreateRoom()">Create Room</button>
-<input #input_id>
-<button (click)="rtc.JoinRoom(input_id.value)">Join Room</button>
-<div style="display: flex; flex-direction: row; justify-content: space-evenly; width: 100%;">
-    <div class="video-container">
-        <video playsinline autoplay muted #local_video></video>
-    </div>
-    <!--<video playsinline autoplay muted *ngFor="let i of rtc.GetConnectionCount()"></video>-->
-    <app-chat></app-chat>
+<div class="container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Profile</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card-subtitle>Who Are You?</mat-card-subtitle>
+            <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1">Tutor</mat-radio-button>
+                <mat-radio-button value="2">Student</mat-radio-button>
+            </mat-radio-group>
+            <mat-card-subtitle>Teaching</mat-card-subtitle>
+            <mat-form-field appearance="fill">
+                <mat-label>Subject</mat-label>
+                <mat-select [(ngModel)]="selectedSubject">
+                    <mat-option *ngFor="let subject of subjects" [value]="subject">{{ subject }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Privacy & Sharing</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card-subtitle>Privacy</mat-card-subtitle>
+            <mat-radio-group aria-label="Select an option">
+                <mat-radio-button value="1">Public</mat-radio-button>
+                <mat-radio-button value="2">Private</mat-radio-button>
+            </mat-radio-group>
+            <mat-card-subtitle>No. of People</mat-card-subtitle>
+            <mat-form-field appearance="fill">
+                <mat-label>Size</mat-label>
+                <mat-select [(ngModel)]="selectedSize">
+                    <mat-option *ngFor="let size of sizes" [value]="size">{{ size }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-card-subtitle>Sharing</mat-card-subtitle>
+            <mat-form-field appearance="fill">
+                <mat-label>setting</mat-label>
+                <mat-select [(ngModel)]="selectedShareSetting">
+                    <mat-option *ngFor="let shareSetting of shareSettings" [value]="shareSetting">{{ shareSetting }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>White Board</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card-subtitle>Sharing</mat-card-subtitle>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Room Name</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card-subtitle>Name</mat-card-subtitle>
+
+        </mat-card-content>
+    </mat-card>
 </div>
