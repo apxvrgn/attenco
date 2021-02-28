@@ -4,12 +4,12 @@ threadsafe: yes
 
 handlers:
   - url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
-    static_files: dist/angular-on-gcp/\1
-    upload: dist/angular-on-gcp/(.*)(|\.map)
+    static_files: dist/attenco/\1
+    upload: dist/attenco/(.*)(|\.map)
 
   - url: /(.*)
-    static_files: dist/angular-on-gcp/index.html
-    upload: dist/angular-on-gcp/index.html
+    static_files: dist/attenco/index.html
+    upload: dist/attenco/index.html
 
 skip_files:
   - e2e/
