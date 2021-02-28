@@ -54,6 +54,7 @@ export class WhiteboardComponent implements OnInit, AfterViewInit {
     this.wb.board_ref.snapshotChanges(['child_added'])
     .subscribe(actions => {
       actions.forEach(action => {
+        console.log(action);
         let data = action.payload.val();
         if (data.user != Globals.user?.uid && this.context) {
           this.context.beginPath();
